@@ -1,0 +1,45 @@
+<UserControl 
+			 x:Class="youtube_downloader_plus.Views.DialogView"
+			 xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:youtube_downloader_plus.ViewModels"
+             mc:Ignorable="d" 
+			 d:DesignHeight="250"
+             d:DesignWidth="400"
+	         x:DataType="vm:DialogViewModel"
+	         Background="AntiqueWhite">
+
+	
+	<StackPanel>
+		<Grid
+            Margin="1"
+            ColumnDefinitions="400"
+            RowDefinitions="150, 100"
+            ShowGridLines="False">
+			<Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+				<TextBlock Text="{Binding DialogText}" 
+						   TextWrapping="Wrap" 
+						   />
+			</Label>
+
+			<Button
+                Name="saveFile"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+				 VerticalAlignment="Center"
+				IsEnabled="True"
+                Command="{Binding CloseDialogWindowCommand}">
+				<TextBlock VerticalAlignment="Center" Text="Close" />
+			</Button>
+		</Grid>
+	</StackPanel>
+</UserControl>

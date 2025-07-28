@@ -1,0 +1,323 @@
+<UserControl
+    x:Class="youtube_downloader_plus.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localConverters="using:youtube_downloader_plus.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:youtube_downloader_plus.ViewModels"
+    d:DesignHeight="620"
+    d:DesignWidth="490"
+    x:DataType="vm:MainViewModel"
+    Background="AntiqueWhite"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+			<Image Width="16" Height="16" Source="avares://MyApp/Assets/green.png" />
+						<Image Width="16" Height="16" Source="avares://MyApp/Assets/red.png" />
+        -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+
+    <UserControl.Resources>
+        <localConverters:BinaryColorConverter x:Key="binaryColorConverter" />
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="TextBlock.disablable">
+            <Setter Property="TextElement.Foreground" Value="{Binding AdvancedOptionsEnabled, Converter={StaticResource binaryColorConverter}, ConverterParameter=Black-Gray}" />
+        </Style>
+
+        <Style>
+            <Style.Resources>
+                <StreamGeometry x:Key="button_green">M27.3138 4.68622C28.8759 6.24832 28.8759 8.78098 27.3138 10.3431L12.5409 25.116C11.9001 25.7568 11.0972 26.2114 10.218 26.4312L5.63602 27.5767C4.90364 27.7598 4.24025 27.0964 4.42335 26.364L5.56885 21.782C5.78864 20.9028 6.24323 20.0999 6.88402 19.4591L21.6569 4.68622C23.219 3.12412 25.7517 3.12412 27.3138 4.68622ZM20.2426 8.92865L8.29824 20.8734C7.91376 21.2578 7.641 21.7396 7.50913 22.2671L6.76786 25.2322L9.73295 24.4909C10.2604 24.359 10.7422 24.0863 11.1267 23.7018L23.0706 11.7566L20.2426 8.92865ZM23.0712 6.10043L21.6566 7.51465L24.4846 10.3426L25.8996 8.92886C26.6806 8.14781 26.6806 6.88148 25.8996 6.10043C25.1185 5.31939 23.8522 5.31939 23.0712 6.10043Z</StreamGeometry>
+                <StreamGeometry x:Key="button_red">M8.93944 10.0001L2.21979 3.28027C1.9269 2.98737 1.9269 2.5125 2.2198 2.21961C2.51269 1.92672 2.98757 1.92672 3.28046 2.21962L21.7802 20.7198C22.0731 21.0127 22.0731 21.4875 21.7802 21.7804C21.4873 22.0733 21.0125 22.0733 20.7196 21.7804L14 15.0608L9.0621 19.9987C8.78522 20.2756 8.44089 20.4754 8.06312 20.5784L2.94743 21.9736C2.38756 22.1263 1.87383 21.6126 2.02652 21.0527L3.42171 15.937C3.52474 15.5593 3.72456 15.2149 4.00144 14.9381L8.93944 10.0001ZM12.9392 13.9999L10.0001 11.0607L5.0621 15.9987C4.96981 16.091 4.9032 16.2058 4.86886 16.3317L3.81901 20.1811L7.66845 19.1313C7.79437 19.097 7.90915 19.0303 8.00144 18.9381L12.9392 13.9999Z M17.9393 8.99963L15.0598 11.8793L16.1207 12.9401L21.0304 8.03039C22.4279 6.63293 22.4279 4.36719 21.0304 2.96973C19.633 1.57227 17.3672 1.57227 15.9698 2.96973L11.0601 7.87943L12.1207 8.94013L15.0003 6.06063L17.9393 8.99963ZM17.0304 4.03039C17.8421 3.21871 19.1581 3.21871 19.9698 4.03039C20.7814 4.84206 20.7814 6.15805 19.9698 6.96973L18.9993 7.93963L16.0603 4.99963L17.0304 4.03039Z</StreamGeometry>
+            </Style.Resources>
+        </Style>
+
+        <Style Selector="ToggleButton PathIcon.button_on">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="ToggleButton:checked PathIcon.button_on">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="ToggleButton PathIcon.button_off">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="ToggleButton:checked PathIcon.button_off">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+
+    </UserControl.Styles>
+
+    <StackPanel>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Settings">
+                    <MenuItem Command="{Binding OpenPreferencesCommand}" Header="Preferences" />
+                    <Separator />
+                    <MenuItem Header="TODO:_Setup dependencies" />
+                </MenuItem>
+                <MenuItem Header="_About">
+                    <MenuItem Header="TODO:_Check for updates" />
+                    <Separator />
+                    <MenuItem Command="{Binding OpenAboutDialogCommand}" Header="_About program" />
+                </MenuItem>
+            </Menu>
+            <TextBlock />
+        </DockPanel>
+
+        <StackPanel>
+            <Grid
+                Margin="1"
+                ColumnDefinitions="490"
+                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                ShowGridLines="False">
+                <!--
+                    Lesser grid row 0
+                    Command="{Binding GetFormatsClickedCommand}">
+                -->
+                <StackPanel Grid.Row="0">
+                    <Grid
+                        Margin="1"
+                        ColumnDefinitions="400, 90"
+                        RowDefinitions="Auto, Auto, Auto, Auto"
+                        ShowGridLines="False">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="2"
+                            VerticalAlignment="Center">
+                            Video link
+                        </Label>
+                        <TextBox
+                            x:Name="ytUrl"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="4"
+                            PropertyChanged="UrlChanged"
+                            Text="{Binding Url}"
+                            Watermark="enter youtube link" />
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="4">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="Save to..."
+                                TextWrapping="Wrap" />
+                        </Label>
+                        <TextBox
+                            Name="outputPath"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="4"
+                            IsReadOnly="True"
+                            PropertyChanged="SavePathChanged"
+                            Text="{Binding FilePath}"
+                            Watermark="select save folder" />
+                        <Button
+                            Name="saveFile"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="2"
+                            Command="{Binding SaveFileCommand}">
+                            <TextBlock VerticalAlignment="Center" Text="PICK" />
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+                <!--
+                    Lesser grid row 1
+                -->
+                <StackPanel Grid.Row="1">
+                    <Button
+                        Name="downloadFile"
+                        Width="100"
+                        Height="50"
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Command="{Binding DownloadFileCommand}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="DOWNLOAD" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Grid
+                        Margin="1"
+                        ColumnDefinitions="150, 200"
+                        RowDefinitions="Auto, Auto, Auto, Auto"
+                        ShowGridLines="False">
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5"
+                            VerticalAlignment="Center">
+                            ADVANCED OPTIONS
+                        </TextBlock>
+                        <ToggleButton
+                            Name="loadAdvancedOptions"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding LoadAvancedOptionsCommand}"
+                            IsChecked="{Binding AdvancedOptionsChecked}">
+
+                            <Panel>
+                                <PathIcon Classes="button_off" Data="{StaticResource button_red}" />
+                                <PathIcon Classes="button_on" Data="{StaticResource button_green}" />
+                            </Panel>
+
+                        </ToggleButton>
+                    </Grid>
+                </StackPanel>
+                <!--
+                    Lesser grid row 3
+                -->
+                <StackPanel Grid.Row="3">
+                    <Rectangle
+                        Height="4"
+                        HorizontalAlignment="Stretch"
+                        Fill="RosyBrown" />
+                </StackPanel>
+
+                <!--
+                    Lesser grid row 4
+                    Enables/Hides Video, Audio, File name, etc options
+                -->
+                <StackPanel
+                    Name="gridAdvanced2"
+                    Grid.Row="4"
+                    IsEnabled="{Binding AdvancedOptionsChecked}">
+                    <Grid
+                        Margin="1"
+                        ColumnDefinitions="400, 90"
+                        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                        ShowGridLines="False">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="2">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Classes="disablable"
+                                Text="video format"
+                                TextWrapping="Wrap" />
+                        </Label>
+                        <ComboBox
+                            x:Name="videoFormats"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="390"
+                            Margin="4"
+                            Classes="excludableVideo"
+                            IsEnabled="{Binding !ExcludeVideoDownloadEnabled}"
+                            ItemsSource="{Binding SourceInfo.AvailableFormats.VideoCodecs}"
+                            MaxDropDownHeight="100"
+                            SelectedIndex="{Binding SelectedVideoIndex}"
+                            SelectedItem="{Binding SelectedVideo}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <CheckBox
+                            Name="excludeVideoDownload"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="2"
+                            IsChecked="{Binding ExcludeVideoDownloadEnabled}"
+                            IsEnabled="{Binding !ExcludeAudioDownloadEnabled}"
+                            ToolTip.Tip="Do not download video">
+                            -vn
+                        </CheckBox>
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="2">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Classes="disablable"
+                                Text="audio format"
+                                TextWrapping="Wrap" />
+                        </Label>
+                        <ComboBox
+                            x:Name="audioFormats"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Width="390"
+                            Margin="4"
+                            Classes="excludableAudio"
+                            IsEnabled="{Binding !ExcludeAudioDownloadEnabled}"
+                            ItemsSource="{Binding SourceInfo.AvailableFormats.AudioCodecs}"
+                            MaxDropDownHeight="100"
+                            SelectedIndex="{Binding SelectedAudioIndex}"
+                            SelectedItem="{Binding SelectedAudio}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <CheckBox
+                            Name="excludeAudioDownload"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="2"
+                            IsChecked="{Binding ExcludeAudioDownloadEnabled}"
+                            IsEnabled="{Binding !ExcludeVideoDownloadEnabled}"
+                            ToolTip.Tip="Do not download audio">
+                            -an
+                        </CheckBox>
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="2">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Classes="disablable"
+                                Text="file name..."
+                                TextWrapping="Wrap" />
+                        </Label>
+                        <TextBox
+                            Name="fileName"
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Width="390"
+                            Margin="2"
+                            IsReadOnly="True"
+                            Text="{Binding FileName}" />
+                    </Grid>
+                </StackPanel>
+                <!--
+                    Lesser grid row 5
+                -->
+                <StackPanel Grid.Row="5">
+                    <TextBox
+                        Height="110"
+                        Margin="5"
+                        AcceptsReturn="True"
+                        Background="AntiqueWhite"
+                        CaretIndex="{Binding StatusCaretIndex}"
+                        FontSize="9"
+                        IsReadOnly="True"
+                        Text="{Binding StatusLine}"
+                        TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
+
+

@@ -1,0 +1,85 @@
+<UserControl
+    x:Class="youtube_downloader_plus.Views.AboutProgramView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:youtube_downloader_plus.ViewModels"
+    d:DesignHeight="250"
+    d:DesignWidth="400"
+    x:DataType="vm:AboutProgramViewModel"
+    Background="AntiqueWhite"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+			<Image Width="16" Height="16" Source="avares://MyApp/Assets/green.png" />
+						<Image Width="16" Height="16" Source="avares://MyApp/Assets/red.png" />
+        -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <StackPanel>
+        <Grid
+            Margin="1"
+            ColumnDefinitions="400"
+            RowDefinitions="60, 30, 40, 40, 90"
+            ShowGridLines="False">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom">
+                <TextBlock Text="Youtube Downloader PLUS" TextWrapping="Wrap" />
+            </Label>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
+                <TextBlock Text="by f1ow03" TextWrapping="Wrap" />
+            </Label>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
+                <SelectableTextBlock Text="https://github.com/f1ow03" TextWrapping="Wrap" />
+            </Label>
+
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
+                <TextBlock Text="v 1.0 (2024)" TextWrapping="Wrap" />
+            </Label>
+
+            <Button
+                Name="saveFile"
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="2"
+                HorizontalAlignment="Center"
+                Command="{Binding CloseAboutWindowCommand}"
+                IsEnabled="True">
+                <TextBlock VerticalAlignment="Center" Text="Close" />
+            </Button>
+
+        </Grid>
+    </StackPanel>
+
+
+
+
+</UserControl>
+

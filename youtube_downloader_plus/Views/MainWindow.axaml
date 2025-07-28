@@ -1,0 +1,21 @@
+<Window
+    x:Class="youtube_downloader_plus.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:youtube_downloader_plus.Views"
+    xmlns:vm="using:youtube_downloader_plus.ViewModels"
+    Title="Youtube Downloader Plus"
+    Width="490"
+    Height="620"
+    d:DesignHeight="620"
+    d:DesignWidth="500"
+    Background="AntiqueWhite"
+    CanResize="False"
+    Icon="/Assets/YTDLPLUS.ico"
+    mc:Ignorable="d"
+	WindowState="Normal">
+    <views:MainView />
+	
+</Window>

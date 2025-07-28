@@ -1,0 +1,52 @@
+<UserControl
+    x:Class="youtube_downloader_plus.Views.DownloadOptionsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localConverters="using:youtube_downloader_plus.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:youtube_downloader_plus.ViewModels"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    x:DataType="vm:PreferencesViewModels.DownloadOptionsViewModel"
+    Background="AntiqueWhite"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <localConverters:EnumToDisplayNameConverter x:Key="enumToDisplayNameConverter" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <Grid
+            Margin="1"
+            ColumnDefinitions="150, 200"
+            RowDefinitions="50, 50"
+            ShowGridLines="False">
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="2"
+                VerticalAlignment="Center">
+                Default download
+            </Label>
+
+            <ComboBox
+                x:Name="defaultFile"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="200"
+                Margin="4"
+                Classes=""
+                IsEnabled=""
+                ItemsSource="{Binding DropdownItems}"
+                MaxDropDownHeight="100"
+                PropertyChanged="ParamChanged"
+                SelectedIndex="{Binding SelectedOptionIndex}"
+                SelectedItem="{}" />
+
+        </Grid>
+    </StackPanel>
+
+</UserControl>
+
